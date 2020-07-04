@@ -1,0 +1,46 @@
+server:
+  port: 9000
+spring:
+  profiles:
+    active: @profileActive@
+  application:
+    name: service-register
+eureka:
+  #server:
+    #EvictionTask服务剔除调度间隔(秒),用于剔除过期的实例
+    #eviction-interval-timer-in-ms: 5000 #默认为60000
+    #注册实例缓存时间,调整readWriteCacheMap的过期时间
+    #response-cache-auto-expiration-in-seconds: 60 #默认180
+    #注册实例缓存,关闭readOnlyResponseCache
+    #use-read-only-response-cache: false #默认为true
+    #自我保护机制,生产环境必须开启,开发,测试环境建议关闭
+    #enable-self-preservation: true
+    #指定每分钟需要收到续约次数的阈值,生产环境适当调小,开发测试不用变动
+    #renewal-percent-threshold: 0.49 #默认0.85
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      #defaultZone: http://127.0.0.1:8101/eureka
+    # false表示不向注册中心注册自己
+    register-with-eureka: false
+    # false表示自己端就是注册中心，我的职责就是维护服务实例，并不需要去检索服务
+    fetch-registry: false
+
+#eureka:
+#  client: #eureka客户端配置
+#    register-with-eureka: true #是否将自己注册到eureka服务端上去
+#    fetch-registry: true #是否获取eureka服务端上注册的服务列表
+#    service-url:
+#      defaultZone: http://localhost:8001/eureka/ # 指定注册中心地址
+#    enabled: true # 启用eureka客户端
+#    registry-fetch-interval-seconds: 30 #定义去eureka服务端获取服务列表的时间间隔
+#  instance: #eureka客户端实例配置
+#    lease-renewal-interval-in-seconds: 30 #定义服务多久去注册中心续约
+#    lease-expiration-duration-in-seconds: 90 #定义服务多久不去续约认为服务失效
+#    metadata-map:
+#      zone: jiangsu #所在区域
+#    hostname: localhost #服务主机名称
+#    prefer-ip-address: false #是否优先使用ip来作为主机名
+#  server: #eureka服务端配置
+#    enable-self-preservation: false #关闭eureka服务端的保护机制
